@@ -1,8 +1,5 @@
-import React, {Component, useEffect, useMemo} from 'react'; 
+import React from 'react'; 
 import axios from 'axios';
-import {useTable} from 'react-table';
-
-
 
 function MusicTable (props){   
         return ( 
@@ -24,12 +21,19 @@ function MusicTable (props){
                             <td>{song.album}</td>
                             <td>{song.genre}</td>
                             <td>{song.release_date}</td>
+                            <button onClick={()=>this.deleteSong(song)}>delete</button>
                         </tr>
                         )}
                 </tbody>
             </table>
          );
+
+function deleteSong(){
+    axios.delete('http://127.0.0.1:8000/music/')
+    .then(response => this.setState({
+      library: response.data
+    })
+  )}
 }
 
- 
 export default MusicTable;

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import './App.css';
 import MusicTable from './components/MusicTable/MusicTable';
+import CreateSong from './components/CreateSong/CreateSong';
 
 class App extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class App extends Component {
 
 componentDidMount(){
     this.getLibrary();
+    this.filterSongs();
 }
 
 async getLibrary(){
@@ -24,9 +26,10 @@ async getLibrary(){
     // let table = this.library.map
     // return {table}
 }
+
 filterSongs(termToFilter){
   let filteredResults = this.state.library.filter(function(el){
-    if(el.title.includes(termToFilter))
+    if(el.title.includes(termToFilter));
     {
       return true;
     }
@@ -36,13 +39,24 @@ filterSongs(termToFilter){
   })
 }
 
+handleChange(event){
+ this.setState({
+   [event.target.name]: event.target.value
+ })
+}
+
+
   render() { 
     console.log(this.state);
     return ( 
       <div className='App'>
         <h1>Music Library</h1>
-        <button onClick={()=>this.filterSongs("R")}>click me</button>
+        <input type='text' name='search' value = {this.termToFilter} onChange={this.handleChange}/>
+        <button type= 'submit'  onClick={()=>this.filterSongs(" ")}>search</button>
+        <br></br><br></br>
          <MusicTable songs ={this.state.library}/> 
+         <br></br><br></br>
+         <CreateSong />
       </div>
      );
   }
