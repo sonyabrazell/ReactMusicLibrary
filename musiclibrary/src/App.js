@@ -1,26 +1,51 @@
-import logo from './logo.svg';
+import React, {Component} from 'react';
+import axios from 'axios';
 import './App.css';
-import axios from "axios";
+import MusicTable from './components/MusicTable/MusicTable';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { 
+      library: []
+     }
+  }
+
+componentDidMount(){
+    this.getLibrary();
 }
 
+async getLibrary(){
+    let response = await axios.get('http://127.0.0.1:8000/music/')
+    console.log(response.data)
+    this.setState({
+    library: response.data
+  })
+    // let table = this.library.map
+    // return {table}
+}
+filterSongs(termToFilter){
+  let filteredResults = this.state.library.filter(function(el){
+    if(el.title.includes(termToFilter))
+    {
+      return true;
+    }
+  })
+  this.setState({
+    library: filteredResults
+  })
+}
+
+  render() { 
+    console.log(this.state);
+    return ( 
+      <div className='App'>
+        <h1>Music Library</h1>
+        <button onClick={()=>this.filterSongs("R")}>click me</button>
+         <MusicTable songs ={this.state.library}/> 
+      </div>
+     );
+  }
+}
+ 
 export default App;
