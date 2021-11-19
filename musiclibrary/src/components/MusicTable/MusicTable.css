@@ -1,19 +1,23 @@
 table {
-
-}
-
-.tbody {
+    text-align: center;
     
-}
-
-.tr {
 
 }
 
-.th {
-
+tbody {
+    text-align: center;
 }
 
-.button {
-    
+tr {
+    text-align: center;
+}
+
+th {
+    text-align: center;
+    text-transform: uppercase;
+    padding: 20px;
+}
+
+button {
+    text-align: center;
 }

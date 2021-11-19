@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import './CreateSong.css'
 
 class CreateSong extends Component {
     constructor(props) {
@@ -9,25 +9,21 @@ class CreateSong extends Component {
             artist: '',
             album: '',
             genre: '',
-            releaseDate: ''
-         }
+            release_date: ''
+        }
     }
 
     handleChange = (event) => {
         this.setState({
-            [event.target.name]: event.target.value
-        })
+            [event.target.name]: event.target.value,
+        });
 
-    }
+    };
+
     handleSubmit = (event) => {
         event.preventDefault();
-        axios.post('http://127.0.0.1:8000/music/')
-        .then(response =>{
-        this.setState({
-        library: response.data
-        },
-        )})
-    }
+        this.props.addNewSong(this.state);
+    };
 
 render(){
     return ( 
@@ -37,37 +33,36 @@ render(){
             <input type= 'text' 
             name='title' 
             onChange={this.handleChange} 
-            value={this.state.library}></input>
+            value={this.state.title}></input>
 
             <label>Artist: </label>
             <input type= 'text' 
             name='artist' 
             onChange={this.handleChange} 
-            value={this.state.library}></input>
+            value={this.state.artist}></input>
 
             <label>Album: </label>
             <input type= 'text' 
             name='album' onChange={this.handleChange} 
-            value={this.state.library}></input>
+            value={this.state.album}></input>
 
             <label>Genre: </label>
             <input type= 'text'
-                name='genre' 
-                onChange={this.handleChange} 
-                value={this.state.library}></input>
+            name='genre' 
+            onChange={this.handleChange} 
+                value={this.state.genre}></input>
 
             <label>Release Date: </label>
             <input type= 'text' 
             name='title' 
             onChange={this.handleChange} 
-            value={this.state.library}></input>
+            value={this.state.release_date}></input>
 
-            <button type='submit'
-            onClick={()=>this.handleSubmit('')}>Add</button>
+            <button type='submit'>Add</button>
         </div>
         </form>
             
-         );
+        );
     
     }}
 export default CreateSong;

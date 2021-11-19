@@ -3,13 +3,14 @@ import axios from 'axios';
 import './App.css';
 import MusicTable from './components/MusicTable/MusicTable';
 import CreateSong from './components/CreateSong/CreateSong';
+import SearchBar  from './components/SearchBar/SearchBar';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
       library: []
-     }
+    }
   }
 
 componentDidMount(){
@@ -22,9 +23,7 @@ async getLibrary(){
     console.log(response.data)
     this.setState({
     library: response.data
-  })
-    // let table = this.library.map
-    // return {table}
+    })
 }
 
 filterSongs(termToFilter){
@@ -39,27 +38,41 @@ filterSongs(termToFilter){
   })
 }
 
-handleChange(event){
- this.setState({
-   [event.target.name]: event.target.value
- })
+deleteSong = (song.id)=> {
+  axios 
+  .delete('http://127.0.0.1:8000/music/', song.id)
+  .then(response => this.setState({
+    library: response.data
+  })
+)}
+
+addSong = (songToAdd) => {
+  axios
+  .post('http://127.0.0.1:8000/music/', songToAdd)
+  .then(response => this.setState({
+    library: response.data
+  }))
 }
 
+handleChange(event){
+  this.setState({
+    [event.target.name]: event.target.value,
+  });
+};
 
   render() { 
     console.log(this.state);
     return ( 
       <div className='App'>
         <h1>Music Library</h1>
-        <input type='text' name='search' value = {this.termToFilter} onChange={this.handleChange}/>
-        <button type= 'submit'  onClick={()=>this.filterSongs(" ")}>search</button>
+        <SearchBar />
         <br></br><br></br>
-         <MusicTable songs ={this.state.library}/> 
-         <br></br><br></br>
-         <CreateSong />
+        <MusicTable songs ={this.state.library}/> 
+        <br></br><br></br>
+        <CreateSong />
       </div>
-     );
+    );
   }
 }
- 
+
 export default App;
