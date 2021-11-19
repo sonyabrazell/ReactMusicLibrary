@@ -38,7 +38,7 @@ filterSongs(termToFilter){
   })
 }
 
-deleteSong = (song.id)=> {
+deleteSong = (prsong.id)=> {
   axios 
   .delete('http://127.0.0.1:8000/music/', song.id)
   .then(response => this.setState({
