@@ -16,6 +16,7 @@ class App extends Component {
 componentDidMount(){
     this.getLibrary();
     this.filterSongs();
+    this.deleteSong();
 }
 
 async getLibrary(){
@@ -38,9 +39,9 @@ filterSongs(termToFilter){
   })
 }
 
-deleteSong = (prsong.id)=> {
+deleteSong = (song) => {
   axios 
-  .delete('http://127.0.0.1:8000/music/', song.id)
+  .delete('http://127.0.0.1:8000/music/', song)
   .then(response => this.setState({
     library: response.data
   })
@@ -64,12 +65,15 @@ handleChange(event){
     console.log(this.state);
     return ( 
       <div className='App'>
-        <h1>Music Library</h1>
-        <SearchBar />
+        <div className='header'>
+          <h1>Music Library</h1>
+        </div>
         <br></br><br></br>
         <MusicTable songs ={this.state.library}/> 
         <br></br><br></br>
         <CreateSong />
+        <br></br><br></br>
+        <SearchBar />
       </div>
     );
   }

@@ -1,3 +1,15 @@
 label {
     padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+.newSong {
+    background-color: lightgray;
+    padding-top: 5em;
+    padding-bottom: 5em;
+}
+
+h3 {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
 }

@@ -1,6 +1,7 @@
 table {
     text-align: center;
-    
+    width: 100%;
+    font-family: 'Courier New', Courier, monospace;
 
 }
 
@@ -20,4 +21,5 @@ th {
 
 button {
     text-align: center;
+    font-family: 'Courier New', Courier, monospace;
 }

@@ -9,7 +9,7 @@ class CreateSong extends Component {
             artist: '',
             album: '',
             genre: '',
-            release_date: ''
+            release_date: '',
         }
     }
 
@@ -26,9 +26,10 @@ class CreateSong extends Component {
     };
 
 render(){
-    return ( 
+    return (
         <form onSubmit={(event) => this.handleSubmit(event)}>
-        <div>
+        <h3>Add New Song</h3>
+        <div className='newSong'>
             <label>Title: </label>
             <input type= 'text' 
             name='title' 
@@ -50,11 +51,11 @@ render(){
             <input type= 'text'
             name='genre' 
             onChange={this.handleChange} 
-                value={this.state.genre}></input>
+            value={this.state.genre}></input>
 
             <label>Release Date: </label>
             <input type= 'text' 
-            name='title' 
+            name='release_date' 
             onChange={this.handleChange} 
             value={this.state.release_date}></input>
 
